@@ -1,0 +1,30 @@
+name: Epic Free Games Notifier
+
+on:
+  schedule:
+    # This runs every Thursday at 16:30 UTC (Just after the store updates)
+    - cron: '30 16 * * 4'
+  workflow_dispatch: # Allows you to run it manually for testing
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run bot script
+        env:
+          # This pulls the secret from your GitHub repository settings
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          EPIC_API_URL: ${{ secrets.EPIC_API_URL }}
+        run: python main.py
