@@ -24,7 +24,7 @@ def get_free_games():
             url = f"https://store.epicgames.com/en-US/p/{slug}"
             
             # Find the best image (Wide landscape images look best in Slack)
-            image_url = next((img['url'] for img in game['keyImages'] if img['type'] == 'Thumbnail'), None)
+            image_url = next((img['url'] for img in game['keyImages'] if img['type'] == 'OfferImageWide'), None)
             
             # Create a "Block" for this game
             formatted_blocks.extend([
@@ -54,3 +54,4 @@ def send_to_slack(blocks):
 if __name__ == "__main__":
     blocks = get_free_games()
     send_to_slack(blocks)
+    
