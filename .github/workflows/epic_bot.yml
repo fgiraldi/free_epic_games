@@ -1,9 +1,6 @@
 name: Epic Free Games Notifier
 
 on:
-  schedule:
-    # This runs every Thursday at 16:30 UTC (Just after the store updates)
-    - cron: '30 16 * * 4'
   workflow_dispatch: # Allows you to run it manually for testing
 
 jobs:
